@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Santosh weds Aishwarya</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+      :root {
+        --bg-1: #fffaf7;
+        --bg-2: #f7e7e5;
+        --bg-3: #f4e3d1;
+        --rose: #b46a6a;
+        --rose-deep: #7d3d3d;
+        --gold: #caa867;
+        --gold-soft: #e9d5a1;
+        --text: #2d1d1b;
+        --muted: #744e4a;
+        --card: rgba(255, 255, 255, 0.58);
+        --shadow: rgba(92, 50, 40, 0.12);
+      }
+
+      * { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(202, 168, 103, 0.18), transparent 28%),
+          radial-gradient(circle at bottom right, rgba(180, 106, 106, 0.20), transparent 32%),
+          linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      }
+
+      .page {
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .page::before,
+      .page::after {
+        content: "";
+        position: absolute;
+        width: 440px;
+        height: 440px;
+        border-radius: 50%;
+        background: rgba(202, 168, 103, 0.12);
+        filter: blur(18px);
+        z-index: 0;
+      }
+
+      .page::before {
+        top: -140px;
+        left: -120px;
+      }
+
+      .page::after {
+        right: -120px;
+        bottom: -160px;
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 52px 20px 80px;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 18px 10px 10px;
+      }
+
+      .eyebrow {
+        font-family: "Cormorant Garamond", serif;
+        letter-spacing: 0.28rem;
+        text-transform: uppercase;
+        color: var(--rose-deep);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .hero-badge {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 18px;
+        border: 1px solid rgba(125, 61, 61, 0.2);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(255,255,255,0.28);
+        box-shadow: 0 15px 35px rgba(109, 61, 61, 0.08);
+      }
+
+      .hero-badge::before {
+        content: "❤";
+        font-size: 2.7rem;
+        color: var(--rose);
+      }
+
+      h1 {
+        margin: 10px 0 14px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3rem, 6vw, 6rem);
+        line-height: 0.9;
+        font-weight: 600;
+        color: var(--rose-deep);
+      }
+
+      .names {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.2rem, 4vw, 4rem);
+        line-height: 1;
+        color: var(--rose);
+      }
+
+      .names .and {
+        font-size: clamp(1.7rem, 2.5vw, 2.5rem);
+        color: var(--gold);
+      }
+
+      .subtitle {
+        margin-top: 24px;
+        font-size: 0.9rem;
+        letter-spacing: 0.2rem;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .couple-showcase {
+        margin-top: 32px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+      }
+
+      .portrait-card {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(125, 61, 61, 0.12);
+        border-radius: 28px;
+        box-shadow: 0 18px 38px rgba(87, 54, 51, 0.08);
+        overflow: hidden;
+      }
+
+      .portrait-figure {
+        position: relative;
+        height: 340px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(145, 86, 86, 0.18), rgba(202, 168, 103, 0.22));
+        overflow: hidden;
+      }
+
+      .portrait-figure::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        filter: saturate(1.05) contrast(1.04);
+      }
+
+      .portrait-figure::after {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1px solid rgba(125, 61, 61, 0.18);
+        border-radius: 20px;
+      }
+
+      .portrait-card.groom .portrait-figure::before {
+        background: linear-gradient(135deg, rgba(40,40,40,0.14), rgba(100,75,60,0.18)), url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;
+      }
+
+      .portrait-card.bride .portrait-figure::before {
+        background: linear-gradient(135deg, rgba(120,80,70,0.18), rgba(142,106,84,0.12)), url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;
+      }
+
+      .portrait-meta {
+        text-align: center;
+        padding: 18px 14px 22px;
+      }
+
+      .portrait-meta .name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.3rem;
+        color: var(--rose-deep);
+      }
+
+      .portrait-meta .role {
+        margin-top: 4px;
+        letter-spacing: 0.12rem;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+
+      .card {
+        margin-top: 34px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.42));
+        border: 1px solid rgba(125, 61, 61, 0.12);
+        box-shadow: 0 28px 50px var(--shadow);
+        border-radius: 34px;
+        backdrop-filter: blur(10px);
+        padding: 36px 28px 28px;
+      }
+
+      .details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+        margin-top: 10px;
+      }
+
+      .detail-box {
+        background: rgba(255,255,255,0.55);
+        border: 1px solid rgba(125, 61, 61, 0.08);
+        border-radius: 22px;
+        padding: 22px 18px;
+        text-align: center;
+        box-shadow: 0 10px 22px rgba(101, 63, 61, 0.04);
+      }
+
+      .detail-box .label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18rem;
+        color: var(--muted);
+      }
+
+      .detail-box .value {
+        margin-top: 12px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.8rem, 2.2vw, 2.5rem);
+        color: var(--text);
+      }
+
+      .divider {
+        width: 140px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        margin: 26px auto 8px;
+      }
+
+      .invite-text {
+        text-align: center;
+        max-width: 720px;
+        margin: 28px auto 0;
+        font-size: 1.05rem;
+        line-height: 2;
+        color: var(--text);
+      }
+
+      .invite-text strong {
+        color: var(--rose-deep);
+        font-weight: 700;
+      }
+
+      .location {
+        margin-top: 24px;
+        text-align: center;
+      }
+
+      .location a {
+        display: inline-block;
+        padding: 15px 28px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: 0.08rem;
+        text-transform: uppercase;
+        box-shadow: 0 16px 28px rgba(125, 61, 61, 0.22);
+      }
+
+      .footer {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 0.78rem;
+        letter-spacing: 0.22rem;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding-top: 30px;
+        }
+
+        .card {
+          padding: 26px 16px 20px;
+        }
+
+        .names {
+          gap: 10px;
+        }
+
+        .location a {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="container">
+        <header class="hero">
+          <div class="eyebrow">Wedding Invitation</div>
+          <div class="hero-badge" aria-hidden="true"></div>
+          <h1>We are getting married</h1>
+          <div class="names">
+            <span>Santosh</span>
+            <span class="and">&amp;</span>
+            <span>Aishwarya</span>
+          </div>
+          <div class="subtitle">Software Engineer &amp; Doctor</div>
+        </header>
+
+        <section class="couple-showcase" aria-label="Bride and groom section">
+          <div class="portrait-card groom">
+            <div class="portrait-figure" aria-hidden="true"></div>
+            <div class="portrait-meta">
+              <div class="name">Santosh</div>
+              <div class="role">The Groom</div>
+            </div>
+          </div>
+
+          <div class="portrait-card bride">
+            <div class="portrait-figure" aria-hidden="true"></div>
+            <div class="portrait-meta">
+              <div class="name">Aishwarya</div>
+              <div class="role">The Bride</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="details">
+            <div class="detail-box">
+              <div class="label">Date</div>
+              <div class="value">2nd Feb 2027</div>
+            </div>
+
+            <div class="detail-box">
+              <div class="label">Venue</div>
+              <div class="value">The Vintage Palace</div>
+            </div>
+
+            <div class="detail-box">
+              <div class="label">Time</div>
+              <div class="value">Evening Celebration</div>
+            </div>
+          </div>
+
+          <div class="divider" aria-hidden="true"></div>
+
+          <p class="invite-text">
+            With joyful hearts, we invite you to celebrate the sacred union of
+            <strong>Santosh</strong>, a dedicated Software Engineer, and
+            <strong>Aishwarya</strong>, a compassionate Doctor. Your presence will
+            make our day even more special as we begin this beautiful journey together.
+          </p>
+
+          <div class="location">
+            <a href="https://share.google/ziCiWVdfvOQzR3F35" target="_blank" rel="noopener noreferrer">
+              View Location
+            </a>
+          </div>
+        </section>
+
+        <div class="footer">With love, we invite you to join us</div>
+      </div>
+    </div>
+  </body>
+</html>
