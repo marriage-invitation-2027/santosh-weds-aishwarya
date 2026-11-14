@@ -37,6 +37,19 @@
           linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
       }
 
+      .floral-bg {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.22;
+        background:
+          radial-gradient(circle at 15% 18%, rgba(121, 155, 103, 0.35), transparent 8%),
+          radial-gradient(circle at 82% 12%, rgba(164, 129, 85, 0.28), transparent 10%),
+          radial-gradient(circle at 25% 78%, rgba(145, 182, 111, 0.28), transparent 9%),
+          radial-gradient(circle at 74% 80%, rgba(168, 110, 92, 0.24), transparent 9%);
+      }
+
       .page {
         min-height: 100vh;
         position: relative;
@@ -235,6 +248,84 @@
         padding: 36px 28px 28px;
       }
 
+      .countdown {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(90px, 1fr));
+        gap: 14px;
+        max-width: 540px;
+        margin: 26px auto 0;
+      }
+
+      .time-box {
+        background: rgba(255,255,255,0.52);
+        border: 1px solid rgba(125, 61, 61, 0.08);
+        border-radius: 18px;
+        padding: 18px 10px;
+        text-align: center;
+        box-shadow: 0 10px 22px rgba(101, 63, 61, 0.04);
+      }
+
+      .time-box .number {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2rem, 3vw, 3rem);
+        color: var(--rose-deep);
+        line-height: 1;
+      }
+
+      .time-box .label {
+        margin-top: 8px;
+        font-size: 0.7rem;
+        letter-spacing: 0.12rem;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .family-section {
+        margin-top: 34px;
+        padding: 22px 18px;
+        border: 1px solid rgba(125, 61, 61, 0.12);
+        border-radius: 24px;
+        background: rgba(255,255,255,0.46);
+        box-shadow: 0 14px 30px rgba(87, 54, 51, 0.04);
+      }
+
+      .family-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        text-align: center;
+        color: var(--rose-deep);
+        margin: 0 0 16px;
+      }
+
+      .family-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+      }
+
+      .family-card {
+        text-align: center;
+        padding: 18px 12px;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.42);
+        border: 1px solid rgba(125, 61, 61, 0.06);
+      }
+
+      .family-card .label {
+        display: block;
+        font-size: 0.72rem;
+        letter-spacing: 0.14rem;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      .family-card strong {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.8rem;
+        color: var(--text);
+      }
+
       .details {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -390,6 +481,10 @@
           grid-template-columns: 1fr;
         }
 
+        .countdown {
+          grid-template-columns: repeat(2, minmax(90px, 1fr));
+        }
+
         .names {
           gap: 10px;
           font-size: clamp(2.1rem, 9vw, 3.3rem);
@@ -431,6 +526,7 @@
   </head>
   <body>
     <div class="page">
+      <div class="floral-bg" aria-hidden="true"></div>
       <div class="container">
         <header class="hero">
           <div class="eyebrow">Wedding Invitation</div>
@@ -463,6 +559,25 @@
         </section>
 
         <section class="card">
+          <div class="countdown" aria-label="Wedding countdown">
+            <div class="time-box">
+              <div class="number" id="days">00</div>
+              <div class="label">Days</div>
+            </div>
+            <div class="time-box">
+              <div class="number" id="hours">00</div>
+              <div class="label">Hours</div>
+            </div>
+            <div class="time-box">
+              <div class="number" id="minutes">00</div>
+              <div class="label">Minutes</div>
+            </div>
+            <div class="time-box">
+              <div class="number" id="seconds">00</div>
+              <div class="label">Seconds</div>
+            </div>
+          </div>
+
           <div class="details">
             <div class="detail-box">
               <div class="label">Date</div>
@@ -504,7 +619,53 @@
           </div>
         </section>
 
+        <section class="family-section">
+          <h2 class="family-title">With the blessings of our families</h2>
+          <div class="family-grid">
+            <div class="family-card">
+              <span class="label">Groom Family</span>
+              <strong>Santosh &amp; Family</strong>
+            </div>
+            <div class="family-card">
+              <span class="label">Bride Family</span>
+              <strong>Aishwarya &amp; Family</strong>
+            </div>
+          </div>
+        </section>
+
         <div class="footer">With love, we invite you to join us</div>
+      </div>
+    </div>
+
+    <script>
+      const weddingDate = new Date('2027-02-02T18:00:00');
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = weddingDate - now;
+
+        if (diff <= 0) {
+          document.getElementById('days').textContent = '00';
+          document.getElementById('hours').textContent = '00';
+          document.getElementById('minutes').textContent = '00';
+          document.getElementById('seconds').textContent = '00';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    </script>
       </div>
     </div>
   </body>
