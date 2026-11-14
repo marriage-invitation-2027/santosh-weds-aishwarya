@@ -142,8 +142,11 @@
       .couple-showcase {
         margin-top: 32px;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 28px;
+        max-width: 980px;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .portrait-card {
@@ -156,7 +159,7 @@
 
       .portrait-figure {
         position: relative;
-        height: 340px;
+        height: 420px;
         display: grid;
         place-items: center;
         background: linear-gradient(135deg, rgba(145, 86, 86, 0.18), rgba(202, 168, 103, 0.22));
@@ -170,6 +173,7 @@
         background-size: cover;
         background-position: center;
         filter: saturate(1.05) contrast(1.04);
+        transform: scale(1.04);
       }
 
       .portrait-figure::after {
@@ -181,11 +185,11 @@
       }
 
       .portrait-card.groom .portrait-figure::before {
-        background: linear-gradient(135deg, rgba(25,20,20,0.08), rgba(66,48,44,0.10)), url('./images/santosh.png') center/cover no-repeat;
+        background: linear-gradient(135deg, rgba(25,20,20,0.08), rgba(66,48,44,0.10)), url('./images/santosh.png') center 18% / cover no-repeat;
       }
 
       .portrait-card.bride .portrait-figure::before {
-        background: linear-gradient(135deg, rgba(99,79,72,0.10), rgba(160,123,100,0.12)), url('./images/aishwarya.png') center/cover no-repeat;
+        background: linear-gradient(135deg, rgba(99,79,72,0.10), rgba(160,123,100,0.12)), url('./images/aishwarya.png') center 20% / cover no-repeat;
       }
 
       .portrait-meta {
@@ -295,21 +299,63 @@
         color: var(--muted);
       }
 
-      @media (max-width: 600px) {
+      @media (max-width: 768px) {
         .container {
-          padding-top: 30px;
+          padding: 28px 16px 52px;
+        }
+
+        .couple-showcase {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .portrait-figure {
+          height: 360px;
         }
 
         .card {
-          padding: 26px 16px 20px;
+          padding: 24px 14px 18px;
+        }
+
+        .details {
+          grid-template-columns: 1fr;
         }
 
         .names {
           gap: 10px;
+          font-size: clamp(2.1rem, 9vw, 3.3rem);
+        }
+
+        h1 {
+          font-size: clamp(2.6rem, 12vw, 4rem);
         }
 
         .location a {
           width: 100%;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .hero-badge {
+          width: 88px;
+          height: 88px;
+        }
+
+        .subtitle {
+          letter-spacing: 0.12rem;
+          font-size: 0.72rem;
+        }
+
+        .portrait-figure {
+          height: 300px;
+        }
+
+        .portrait-meta .name {
+          font-size: 2rem;
+        }
+
+        .portrait-meta .role {
+          letter-spacing: 0.08rem;
         }
       }
     </style>
